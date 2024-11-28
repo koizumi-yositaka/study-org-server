@@ -51,13 +51,28 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<UserResponseDTO> userSignupPost(LoginUserForm loginUserForm) {
-        String email = userService.SignUp(loginUserForm).orElseThrow(()->new UserNotFoundException(loginUserForm.getEmail()));
+        String email = userService.signUp(loginUserForm);
         return ResponseEntity.created(URI.create("users/"+email)).build();
+    }
+
+    //パスワードチェンジ
+    @Override
+    public ResponseEntity<UserResponseDTO> userSignupPut(LoginUserForm loginUserForm) {
+        String email = userService.changePassword(loginUserForm);
+        //今後制限あるかもしれない
+
+        return ResponseEntity.created(URI.create("users/"+email)).build();
+
     }
 
     @Override
     public ResponseEntity<UserResponseDTO> userRoleGet() {
         UserResponseDTO user =authService.getUserDataFromSecurityContext();
         return ResponseEntity.ok(user);
+    }
+
+    @Override
+    public ResponseEntity<Void> userManagePost() {
+        return ResponseEntity.ok().build();
     }
 }

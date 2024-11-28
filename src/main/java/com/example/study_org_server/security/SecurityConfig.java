@@ -31,7 +31,7 @@ public class SecurityConfig {
             .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             // "/api/auth/**"は認証時に使用するエンドポイントのため許可、
             // その他のエンドポイントへのリクエストは認証が必要とした。
-            .authorizeHttpRequests(auth->auth.requestMatchers("/api/user/login","/api/user/signup").permitAll()
+            .authorizeHttpRequests(auth->auth.requestMatchers("/user/login","/user/signup").permitAll()
                     .anyRequest().authenticated())
             // jwtAuthenticationFilterを先に配置することで、リクエストごとにJWTを解析して認証を済ませることができる。
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

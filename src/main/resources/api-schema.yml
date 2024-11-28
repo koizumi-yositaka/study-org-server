@@ -3,9 +3,6 @@ info:
   title: PRODUCT API DOC
   version: "0.0.1"
   description: PRODUCT API DOC
-servers:
-  - url: /api/
-    description: Base path for all API endpoints
 tags:
   - name: opts
     description: 運用監視関連のAPI
@@ -13,7 +10,10 @@ tags:
     description: ユーザー管理
   - name: meeting
     description: ミーティング
+servers:
+  - url: http://localhost:8085/api
 paths:
+
   /health:
     get:
       tags:
@@ -220,6 +220,21 @@ components:
           type: string
           description: "エラーのタイプ"
           default: "User Not Found"
+        detail:
+          type: string
+          description: "エラーの詳細"
+          default: "ユーザが見つかりません"
+      required:
+        - title
+        - detail
+    MeetingNotFoundError:
+      description: "対象のMeetingが見つからない"
+      type: object
+      properties:
+        title:
+          type: string
+          description: "エラーのタイプ"
+          default: "Meeting Not Found"
         detail:
           type: string
           description: "エラーの詳細"

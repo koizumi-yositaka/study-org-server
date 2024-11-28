@@ -4,14 +4,11 @@ import com.example.study_org_server.repository.user.UserRecord;
 import com.example.study_org_server.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.example.model.LoginUserForm;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserCache;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +17,6 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
@@ -37,22 +33,35 @@ public class UserService implements UserDetailsService {
         );
     }
     @Transactional
-    public Optional<String> SignUp(LoginUserForm loginUserForm){
+    public String signUp(LoginUserForm loginUserForm){
         String email=loginUserForm.getEmail();
-
-        if(userRepository.isExistEmail(email)>0){
+        UserRecord user= userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
+        if(user.password().isBlank()){
             String hashedPassword = new BCryptPasswordEncoder().encode(loginUserForm.getPassword());
             userRepository.update(email,hashedPassword);
-            return Optional.ofNullable(email);
+            return email;
+        }else{
+            throw new RuntimeException("すでに初期化済みのアカウントです");
         }
-        return Optional.empty();
     }
-    
-    
-    
+    @Transactional
+    public String changePassword(LoginUserForm loginUserForm){
+        String email=loginUserForm.getEmail();
+        UserRecord user= userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email));
+
+        if(!user.password().isBlank()){
+            String hashedPassword = new BCryptPasswordEncoder().encode(loginUserForm.getPassword());
+            userRepository.update(email,hashedPassword);
+            return email;
+        }else{
+            throw new RuntimeException("不正な操作です");
+        }
+    }
+
     public boolean isExistUser(String email){
         return userRepository.isExistEmail(email)>0;
     }
+
     //キャッシュの更新
     //@CachePut(value = "users", key = "#user.id")
 

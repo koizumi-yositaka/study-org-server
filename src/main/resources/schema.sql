@@ -1,3 +1,12 @@
+-- T_MEETING テーブルの削除
+DROP TABLE IF EXISTS T_MEETING;
+
+-- T_USER テーブルの削除
+DROP TABLE IF EXISTS T_USER;
+
+-- T_AUTHORITY テーブルの削除
+DROP TABLE IF EXISTS T_AUTHORITY;
+
 CREATE TABLE T_AUTHORITY (
     id CHAR(1) PRIMARY KEY,             -- 権限ID (数値型)
     rank VARCHAR(20) NOT NULL UNIQUE,   -- 権限ランク (例: 'A', 'B', 'C')
@@ -17,8 +26,9 @@ CREATE TABLE T_MEETING (
     title VARCHAR(255) NOT NULL UNIQUE, -- メールアドレス
     detail VARCHAR(500) NOT NULL,     -- パスワード（ハッシュ化）
     opener_id INT NOT NULL,          -- 権限ID（外部キー）
+    delete_flg CHAR(1),   -- 削除フラグ
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 作成日時
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 更新日時
-    delete_flg CHAR(1),   -- 削除フラグ
+
     FOREIGN KEY (opener_id) REFERENCES T_USER(id) -- 外部キー制約
 );

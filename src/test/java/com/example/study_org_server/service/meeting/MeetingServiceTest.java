@@ -1,5 +1,6 @@
 package com.example.study_org_server.service.meeting;
 
+import com.example.study_org_server.exception.MeetingNotFoundException;
 import com.example.study_org_server.repository.meeting.MeetingRecord;
 import com.example.study_org_server.repository.meeting.MeetingRepository;
 import org.junit.jupiter.api.Assertions;
@@ -8,8 +9,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.openapitools.example.model.MeetingForm;
+import org.openapitools.example.model.MeetingNotFoundError;
+import org.openapitools.example.model.MeetingResponseDTO;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -18,6 +24,15 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 
 class MeetingServiceTest {
+    static LocalDateTime time_1 =LocalDateTime.of(2020,12,23,12,0);
+    static LocalDateTime time_2 =LocalDateTime.of(2020,12,24,12,0);
+    static LocalDateTime time_3 =LocalDateTime.of(2020,12,25,12,0);
+
+
+    private static final MeetingRecord meetingRecord_1 = new MeetingRecord(null,"TITLE_1","DETAIL_1",1L,time_1,30 ,"0");
+    private static final MeetingRecord meetingRecord_2 = new MeetingRecord(null,"TITLE_2","DETAIL_2",1L,time_2,30 ,"0");
+    private static final MeetingRecord meetingRecord_3 = new MeetingRecord(null,"TITLE_3","DETAIL_3",1L,time_3,30,"0" );
+
     @InjectMocks
     private MeetingService meetingService;
 
@@ -29,9 +44,9 @@ class MeetingServiceTest {
     void findAllMeeting() {
         when(meetingRepository.findAllMeetings()).thenReturn(List.of
                 (
-                        new MeetingRecord(1L,"AAA","",1L,"0",null,null),
-                        new MeetingRecord(2L,"AAA","",1L,"0",null,null),
-                        new MeetingRecord(3L,"AAA","",1L,"0",null,null)
+                        meetingRecord_1,
+                        meetingRecord_2,
+                        meetingRecord_3
                 ));
         Assertions.assertEquals(3,meetingService.findAllMeeting().size());
         verify(meetingRepository,times(1)).findAllMeetings();
@@ -41,10 +56,61 @@ class MeetingServiceTest {
     void findMeetingsByOpenerId() {
         when(meetingRepository.findMeetingsByOpenerId(anyInt())).thenReturn(List.of
                 (
-                        new MeetingRecord(1L,"AAA","",2L,"0",null,null)
+                        meetingRecord_1
                 )
         );
         Assertions.assertEquals(1,meetingService.findMeetingsByOpenerId(1).size());
         verify(meetingRepository,times(1)).findMeetingsByOpenerId(1);
+    }
+
+    @Test
+    void findMeetingById_Success() {
+        when(meetingRepository.findMeetingById(anyInt())).thenReturn(Optional.of
+                (
+                        meetingRecord_1
+                )
+        );
+        MeetingResponseDTO expect = new MeetingResponseDTO(1,"TITLE_1");
+        MeetingResponseDTO actual =meetingService.findMeetingById(1);
+        Assertions.assertEquals(expect.getTitle(),actual.getTitle());
+    }
+    @Test
+    void findMeetingById_Fail() {
+        when(meetingRepository.findMeetingById(anyInt())).thenReturn(Optional.empty());
+        Assertions.assertThrows(MeetingNotFoundException.class,()->meetingService.findMeetingById(1));
+    }
+
+    //delete
+    @Test
+    void deleteMeetingByID_ShouldSuccess(){
+        doNothing().when(meetingRepository).deleteMeetingById(anyInt());
+        meetingService.deleteMeetingById(1);
+        verify(meetingRepository,times(1)).deleteMeetingById(anyInt());
+    }
+
+
+
+    //reserveMeeting
+    @Test
+    void createMeeting_ShouldSuccess(){
+        doNothing().when(meetingRepository).create(any(MeetingRecord.class));
+        MeetingForm form = new MeetingForm();
+        form.setTitle("AAA");
+        form.setDetail("DETAIL");
+        form.setOpenerId(1L);
+        meetingService.reserveMeeting(form);
+        verify(meetingRepository,times(1)).create(any(MeetingRecord.class));
+    }
+
+    @Test
+    void updateMeeting_ShouldSuccess() {
+        doNothing().when(meetingRepository).update(anyInt(),any(MeetingRecord.class));
+        MeetingForm form = new MeetingForm();
+        form.setTitle("AAA");
+        form.setDetail("DETAIL");
+        form.setOpenerId(1L);
+        meetingService.updateMeeting(1,form);
+        verify(meetingRepository,times(1)).update(anyInt(),any(MeetingRecord.class));
+
     }
 }

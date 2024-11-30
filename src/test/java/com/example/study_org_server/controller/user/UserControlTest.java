@@ -1,7 +1,5 @@
-package com.example.study_org_server.control;
+package com.example.study_org_server.controller.user;
 
-import com.example.study_org_server.controller.user.AuthenticationResponse;
-import com.example.study_org_server.controller.user.UserController;
 import com.example.study_org_server.security.SecurityConfig;
 import com.example.study_org_server.security.service.AuthService;
 import com.example.study_org_server.service.user.UserService;
@@ -27,8 +25,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.Optional;
-
+import static com.example.study_org_server.util.TestUtil.asJsonString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -196,11 +193,5 @@ public class UserControlTest {
 
 
 
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 }

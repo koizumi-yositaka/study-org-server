@@ -23,9 +23,11 @@ CREATE TABLE T_USER (
 );
 CREATE TABLE T_MEETING (
     id INT AUTO_INCREMENT PRIMARY KEY, -- ユーザーID (自動インクリメント)
-    title VARCHAR(255) NOT NULL UNIQUE, -- メールアドレス
+    title VARCHAR(255) NOT NULL, -- メールアドレス
     detail VARCHAR(500) NOT NULL,     -- パスワード（ハッシュ化）
     opener_id INT NOT NULL,          -- 権限ID（外部キー）
+    event_date DATETIME NOT NULL, -- 開催日時
+    duration INT NOT NULL DEFAULT 60,
     delete_flg CHAR(1),   -- 削除フラグ
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 作成日時
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- 更新日時

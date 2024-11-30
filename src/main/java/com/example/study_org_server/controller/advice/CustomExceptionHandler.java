@@ -1,5 +1,6 @@
 package com.example.study_org_server.controller.advice;
 
+import com.example.study_org_server.exception.MeetingNotFoundException;
 import com.example.study_org_server.exception.UserNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.openapitools.example.model.ForbiddenError;
@@ -19,9 +20,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler({UserNotFoundException.class, MeetingNotFoundException.class})
     public ResponseEntity<Object> handleProductNotFoundException(UserNotFoundException ex){
         var error= new ResourceNotFoundError();
+        error.setTitle("ERROR");
         error.setDetail(ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }

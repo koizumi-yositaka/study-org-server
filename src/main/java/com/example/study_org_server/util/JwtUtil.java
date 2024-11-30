@@ -32,6 +32,7 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(decodedKey);
     }
     public String getJwtFromRequest(HttpServletRequest req){
+        if(req.getCookies()==null) return null;
         return  Arrays.stream(req.getCookies())
                 .filter(cookie -> "jwt".equals(cookie.getName()))
                 .map(Cookie::getValue)

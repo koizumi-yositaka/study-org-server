@@ -1,8 +1,10 @@
 package com.example.study_org_server.controller.advice;
 
 import com.example.study_org_server.exception.MeetingNotFoundException;
+import com.example.study_org_server.exception.ReservationConflict;
 import com.example.study_org_server.exception.UserNotFoundException;
 import jakarta.validation.ConstraintViolationException;
+import org.openapitools.example.model.ConflictError;
 import org.openapitools.example.model.ForbiddenError;
 import org.openapitools.example.model.ResourceNotFoundError;
 import org.openapitools.example.model.UserNotFoundError;
@@ -20,6 +22,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
+    //404
     @ExceptionHandler({UserNotFoundException.class, MeetingNotFoundException.class})
     public ResponseEntity<Object> handleProductNotFoundException(UserNotFoundException ex){
         var error= new ResourceNotFoundError();
@@ -28,12 +31,23 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
+    //400
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Object> handleBadCredentialsException(BadCredentialsException ex){
         var error= new ForbiddenError();
         error.setDetail(ex.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
     }
+
+    //409
+    @ExceptionHandler(ReservationConflict.class)
+    public ResponseEntity<Object> handleConflictException(ReservationConflict ex){
+        var error= new ConflictError();
+        error.setDetail(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
+
+
     //ConstraintViolationException Errorの処理
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException ex){

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.study_org_server.service.UserServiceTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2024-12-02T11:53:47" hostname="syunk-test.local" time="0.238">
+  <properties/>
+  <testcase name="ユーザ存在しない" classname="com.example.study_org_server.service.UserServiceTest" time="0.029"/>
+  <testcase name="成功" classname="com.example.study_org_server.service.UserServiceTest" time="0.098"/>
+  <testcase name="signUp_ShouldThrowErrorWhenIsNotFirstTime()" classname="com.example.study_org_server.service.UserServiceTest" time="0.001"/>
+  <testcase name="loadUserByUsername_ShouldThrowError()" classname="com.example.study_org_server.service.UserServiceTest" time="0.001"/>
+  <testcase name="ユーザ存在しない" classname="com.example.study_org_server.service.UserServiceTest" time="0.003"/>
+  <testcase name="loadUserByUsername_ShouldReturnUserDetails()" classname="com.example.study_org_server.service.UserServiceTest" time="0.001"/>
+  <testcase name="isExistUser_ShouldReturnTrue()" classname="com.example.study_org_server.service.UserServiceTest" time="0.001"/>
+  <testcase name="changePassword_ShouldThrowErrorWhenIsNotFirstTime()" classname="com.example.study_org_server.service.UserServiceTest" time="0.001"/>
+  <testcase name="成功" classname="com.example.study_org_server.service.UserServiceTest" time="0.095"/>
+  <testcase name="isExistUser_ShouldReturnFalse()" classname="com.example.study_org_server.service.UserServiceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

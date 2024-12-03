@@ -4,15 +4,15 @@ import com.example.study_org_server.exception.MeetingNotFoundException;
 import com.example.study_org_server.repository.meeting.MeetingRecord;
 import com.example.study_org_server.repository.meeting.MeetingRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.openapitools.example.model.MeetingForm;
-import org.openapitools.example.model.MeetingNotFoundError;
-import org.openapitools.example.model.MeetingResponseDTO;
+import org.openapitools.example.model.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -24,32 +24,41 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 
 class MeetingServiceTest {
-    static LocalDateTime time_1 =LocalDateTime.of(2020,12,23,12,0);
-    static LocalDateTime time_2 =LocalDateTime.of(2020,12,24,12,0);
-    static LocalDateTime time_3 =LocalDateTime.of(2020,12,25,12,0);
+    static LocalDate time_1 = LocalDate.of(2020,12,23);
+    static LocalDate time_2 =LocalDate.of(2020,12,24);
+    static LocalDate time_3 =LocalDate.of(2020,12,25);
 
 
-    private static final MeetingRecord meetingRecord_1 = new MeetingRecord(null,"TITLE_1","DETAIL_1",1L,time_1,30 ,"0");
-    private static final MeetingRecord meetingRecord_2 = new MeetingRecord(null,"TITLE_2","DETAIL_2",1L,time_2,30 ,"0");
-    private static final MeetingRecord meetingRecord_3 = new MeetingRecord(null,"TITLE_3","DETAIL_3",1L,time_3,30,"0" );
+    private static final MeetingRecord meetingRecord_1 = new MeetingRecord(null,"TITLE_1","DETAIL_1",1L,time_1,"1700","1800" );
+    private static final MeetingRecord meetingRecord_2 = new MeetingRecord(null,"TITLE_2","DETAIL_2",1L,time_2,"1700","1800" );
+    private static final MeetingRecord meetingRecord_3 = new MeetingRecord(null,"TITLE_3","DETAIL_3",1L,time_3,"1700","1800" );
 
     @InjectMocks
     private MeetingService meetingService;
 
     @Mock
     private MeetingRepository meetingRepository;
+    private OrderProp orderProp;
+    private Pagination pagination;
+
+    @BeforeEach
+    void setup(){
+        pagination= new Pagination();
+        orderProp = new OrderProp();
+
+    }
 
 
     @Test
     void findAllMeeting() {
-        when(meetingRepository.findAllMeetings()).thenReturn(List.of
+        when(meetingRepository.findAllMeetings(any(Pagination.class),any(OrderProp.class))).thenReturn(List.of
                 (
                         meetingRecord_1,
                         meetingRecord_2,
                         meetingRecord_3
                 ));
-        Assertions.assertEquals(3,meetingService.findAllMeeting().size());
-        verify(meetingRepository,times(1)).findAllMeetings();
+        Assertions.assertEquals(3,meetingService.findAllMeeting(pagination,orderProp).size());
+        verify(meetingRepository,times(1)).findAllMeetings(any(Pagination.class),any(OrderProp.class));
     }
 
     @Test

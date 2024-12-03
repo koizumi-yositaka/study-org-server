@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.study_org_server.repository.UserRepositoryTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-12-02T11:53:47" hostname="syunk-test.local" time="0.039">
+  <properties/>
+  <testcase name="update_ShouldUpdateDB()" classname="com.example.study_org_server.repository.UserRepositoryTest" time="0.008"/>
+  <testcase name="isExistEmail_ShouldReturnTrue()" classname="com.example.study_org_server.repository.UserRepositoryTest" time="0.007"/>
+  <testcase name="findByEmail_ShouldReturnNull()" classname="com.example.study_org_server.repository.UserRepositoryTest" time="0.005"/>
+  <testcase name="findByEmail_ShouldReturnUserRecord()" classname="com.example.study_org_server.repository.UserRepositoryTest" time="0.005"/>
+  <testcase name="isExistEmail_ShouldReturnFalse()" classname="com.example.study_org_server.repository.UserRepositoryTest" time="0.007"/>
+  <system-out><![CDATA[2024-12-02T20:53:47.240+09:00  INFO 36876 --- [study-org-server] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.study_org_server.repository.UserRepositoryTest]: UserRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2024-12-02T20:53:47.243+09:00  INFO 36876 --- [study-org-server] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.study_org_server.StudyOrgServerApplication for test class com.example.study_org_server.repository.UserRepositoryTest
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

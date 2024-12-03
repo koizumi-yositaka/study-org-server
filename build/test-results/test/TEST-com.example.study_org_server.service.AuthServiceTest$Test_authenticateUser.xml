@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.study_org_server.service.AuthServiceTest$Test_authenticateUser" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-12-02T11:53:47" hostname="syunk-test.local" time="0.007">
+  <properties/>
+  <testcase name="存在するユーザ" classname="com.example.study_org_server.service.AuthServiceTest$Test_authenticateUser" time="0.003"/>
+  <testcase name="存在しないユーザ" classname="com.example.study_org_server.service.AuthServiceTest$Test_authenticateUser" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

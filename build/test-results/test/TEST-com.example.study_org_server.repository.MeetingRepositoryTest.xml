@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.study_org_server.repository.MeetingRepositoryTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2024-12-02T11:53:43" hostname="syunk-test.local" time="0.662">
+  <properties/>
+  <testcase name="create_ShouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.498"/>
+  <testcase name="search_searchDate_sameYear_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.007"/>
+  <testcase name="search_multi_word_opener_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.007"/>
+  <testcase name="insert_sameDate_shouldFail()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.063"/>
+  <testcase name="search_OneSearchOpenerId_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.004"/>
+  <testcase name="delete_ShouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.007"/>
+  <testcase name="search_TwoSearchOpenerId_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.004"/>
+  <testcase name="search_multi_sameMonth_opener_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.003"/>
+  <testcase name="put_partUpdate_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.008"/>
+  <testcase name="findMeetingById_ShouldReturn()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.003"/>
+  <testcase name="search_after_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.004"/>
+  <testcase name="search_searchWord_LowerAndUpper_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.004"/>
+  <testcase name="search_searchDate_sameDay_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.003"/>
+  <testcase name="findMeetingsByOpenerId_ShouldReturnAll()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.003"/>
+  <testcase name="search_multi_sameMonth_word_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.004"/>
+  <testcase name="search_searchWord_notMatch_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.003"/>
+  <testcase name="search_before_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.004"/>
+  <testcase name="search_beyondYear_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.004"/>
+  <testcase name="search_full_word_opener_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.004"/>
+  <testcase name="findAllMeeting_ShouldReturnAll()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.003"/>
+  <testcase name="put_shouldSuccess()" classname="com.example.study_org_server.repository.MeetingRepositoryTest" time="0.006"/>
+  <system-out><![CDATA[20:53:42.771 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.study_org_server.repository.MeetingRepositoryTest]: MeetingRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:53:42.830 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.study_org_server.StudyOrgServerApplication for test class com.example.study_org_server.repository.MeetingRepositoryTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.3)
+
+2024-12-02T20:53:42.995+09:00  INFO 36876 --- [study-org-server] [    Test worker] c.e.s.repository.MeetingRepositoryTest   : Starting MeetingRepositoryTest using Java 17.0.12 with PID 36876 (started by koizumishuntakashi in /Users/koizumishuntakashi/Desktop/JAVA/study-org-server)
+2024-12-02T20:53:42.996+09:00  INFO 36876 --- [study-org-server] [    Test worker] c.e.s.repository.MeetingRepositoryTest   : No active profile set, falling back to 1 default profile: "default"
+2024-12-02T20:53:43.213+09:00  INFO 36876 --- [study-org-server] [    Test worker] beddedDataSourceBeanFactoryPostProcessor : Replacing 'dataSource' DataSource bean with embedded version
+2024-12-02T20:53:43.328+09:00  INFO 36876 --- [study-org-server] [    Test worker] o.s.j.d.e.EmbeddedDatabaseFactory        : Starting embedded database: url='jdbc:h2:mem:76d10693-a9a4-4ce8-8937-82cade2d4633;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2024-12-02T20:53:43.534+09:00  INFO 36876 --- [study-org-server] [    Test worker] c.e.s.repository.MeetingRepositoryTest   : Started MeetingRepositoryTest in 0.665 seconds (process running for 1.194)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

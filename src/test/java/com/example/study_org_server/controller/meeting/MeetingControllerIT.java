@@ -33,6 +33,7 @@ import org.springframework.web.context.WebApplicationContext;
 import static com.example.study_org_server.util.TestUtil.asJsonString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +75,7 @@ public class MeetingControllerIT {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString(), MeetingResponseDTOList.class);
 
-        LocalDateTime datatime_1=LocalDateTime.of(2020,12,23,12,0);
+        LocalDate datatime_1= LocalDate.of(2020,12,23);
         var createMeeting = new MeetingForm();
         createMeeting.setTitle("AAA");
         createMeeting.setDetail("BBB");
@@ -90,7 +91,9 @@ public class MeetingControllerIT {
                             "title": "AAABBB",
                             "detail": "abcdefghijh",
                             "openerId": 1,
-                            "eventDate": "2024-12-01T10:00:00"
+                            "eventDate": "2024-12-05",
+                            "startTime":"1700",
+                            "endTime":"1800"
                         }
                         """)
                         .accept(MediaType.APPLICATION_JSON))
@@ -158,7 +161,9 @@ public class MeetingControllerIT {
                                     "title": "AAABBB",
                                     "detail": "abcdefghijh",
                                     "openerId": 1,
-                                    "eventDate": "2024-12-01T10:00:00"
+                                    "eventDate": "2024-12-01",
+                                    "startTime":"1700",
+                                    "endTime":"1800"
                                 }
                                 """)
                         .accept(MediaType.APPLICATION_JSON))
@@ -181,7 +186,9 @@ public class MeetingControllerIT {
                                     "title": "AAA",
                                     "detail": "abcdefghijh",
                                     "openerId": 1,
-                                    "eventDate": "2024-12-01T10:00:00"
+                                    "eventDate": "2024-12-01",
+                                    "startTime":"1700",
+                                    "endTime":"1800"
                                 }
                                 """)
                         .accept(MediaType.APPLICATION_JSON))

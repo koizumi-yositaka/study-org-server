@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.study_org_server.service.meeting.MeetingServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2024-12-02T11:53:47" hostname="syunk-test.local" time="0.039">
+  <properties/>
+  <testcase name="findMeetingById_Fail()" classname="com.example.study_org_server.service.meeting.MeetingServiceTest" time="0.031"/>
+  <testcase name="updateMeeting_ShouldSuccess()" classname="com.example.study_org_server.service.meeting.MeetingServiceTest" time="0.001"/>
+  <testcase name="deleteMeetingByID_ShouldSuccess()" classname="com.example.study_org_server.service.meeting.MeetingServiceTest" time="0.001"/>
+  <testcase name="findAllMeeting()" classname="com.example.study_org_server.service.meeting.MeetingServiceTest" time="0.001"/>
+  <testcase name="findMeetingsByOpenerId()" classname="com.example.study_org_server.service.meeting.MeetingServiceTest" time="0.001"/>
+  <testcase name="findMeetingById_Success()" classname="com.example.study_org_server.service.meeting.MeetingServiceTest" time="0.002"/>
+  <testcase name="createMeeting_ShouldSuccess()" classname="com.example.study_org_server.service.meeting.MeetingServiceTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

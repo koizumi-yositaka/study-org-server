@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.study_org_server.controller.user.UserControllerIT" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-12-02T11:53:46" hostname="syunk-test.local" time="0.416">
+  <properties/>
+  <testcase name="signup()" classname="com.example.study_org_server.controller.user.UserControllerIT" time="0.179"/>
+  <testcase name="login()" classname="com.example.study_org_server.controller.user.UserControllerIT" time="0.236"/>
+  <system-out><![CDATA[
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.3)
+
+2024-12-02T20:53:46.226+09:00  INFO 36876 --- [study-org-server] [    Test worker] c.e.s.controller.user.UserControllerIT   : Starting UserControllerIT using Java 17.0.12 with PID 36876 (started by koizumishuntakashi in /Users/koizumishuntakashi/Desktop/JAVA/study-org-server)
+2024-12-02T20:53:46.227+09:00  INFO 36876 --- [study-org-server] [    Test worker] c.e.s.controller.user.UserControllerIT   : No active profile set, falling back to 1 default profile: "default"
+2024-12-02T20:53:46.506+09:00  INFO 36876 --- [study-org-server] [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2024-12-02T20:53:46.516+09:00  INFO 36876 --- [study-org-server] [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-02T20:53:46.516+09:00  INFO 36876 --- [study-org-server] [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-12-02T20:53:46.555+09:00  INFO 36876 --- [study-org-server] [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-12-02T20:53:46.556+09:00  INFO 36876 --- [study-org-server] [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 328 ms
+2024-12-02T20:53:46.579+09:00  INFO 36876 --- [study-org-server] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-12-02T20:53:46.581+09:00  INFO 36876 --- [study-org-server] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn36: url=jdbc:h2:mem:d745e9ed-5081-463f-b33d-5e3391c7bd7a user=SA
+2024-12-02T20:53:46.581+09:00  INFO 36876 --- [study-org-server] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-12-02T20:53:46.668+09:00  INFO 36876 --- [study-org-server] [    Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name daoAuthenticationProviderWithDB
+2024-12-02T20:53:46.668+09:00  WARN 36876 --- [study-org-server] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-12-02T20:53:46.813+09:00  INFO 36876 --- [study-org-server] [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 60297 (http) with context path '/'
+2024-12-02T20:53:46.819+09:00  INFO 36876 --- [study-org-server] [    Test worker] c.e.s.controller.user.UserControllerIT   : Started UserControllerIT in 0.607 seconds (process running for 4.48)
+2024-12-02T20:53:46.888+09:00  INFO 36876 --- [study-org-server] [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-02T20:53:46.888+09:00  INFO 36876 --- [study-org-server] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-02T20:53:46.889+09:00  INFO 36876 --- [study-org-server] [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

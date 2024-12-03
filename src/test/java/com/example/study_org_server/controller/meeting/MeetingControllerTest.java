@@ -10,8 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.openapitools.example.model.MeetingForm;
-import org.openapitools.example.model.MeetingResponseDTO;
+import org.openapitools.example.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -22,6 +21,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -56,8 +56,7 @@ class MeetingControllerTest {
     private final static String detail="DETAIL";
     private final static Long openerId=1L;
     private final static Integer duration =30;
-    private final static LocalDateTime datatime_1=LocalDateTime.of(2020,12,23,12,0);
-
+    private final static LocalDate datatime_1=LocalDate.of(2020,12,23);
 
     @BeforeAll
     public static void setup(){
@@ -66,7 +65,9 @@ class MeetingControllerTest {
         createMeeting.setDetail(title);
         createMeeting.setOpenerId(openerId);
         createMeeting.setEventDate(datatime_1);
-        createMeeting.setDurationMinutes(duration);
+        createMeeting.setStartTime("1700");
+        createMeeting.setEndTime("1800");
+
 
     }
 
@@ -74,13 +75,82 @@ class MeetingControllerTest {
     @WithMockUser
     void meetingGet() throws Exception{
         List<MeetingResponseDTO> meetings = List.of(new MeetingResponseDTO(1,"X"));
-        when(meetingService.findAllMeeting()).thenReturn(meetings);
+        when(meetingService.findAllMeeting(any(),any())).thenReturn(meetings);
         // Act & Assert
         mockMvc.perform(get("/meeting")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Table"));
+    }
+    @Test
+    @WithMockUser
+    void searchMeeting_1() throws Exception{
+        List<MeetingResponseDTO> meetings = List.of(new MeetingResponseDTO(1,"X"));
+        when(meetingService.findAllMeeting(any(),any())).thenReturn(meetings);
+        // Act & Assert
+        mockMvc.perform(get("/meeting?searchWord=AAA")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Table"));
+        var expectParameter = new MeetingSearchForm();
+        expectParameter.setSearchWord("AAA");
+        verify(meetingService,times(1)).searchMeeting(expectParameter,new Pagination(),new OrderProp());
+
+    }
+    @Test
+    @WithMockUser
+    void searchMeeting_2() throws Exception{
+        List<MeetingResponseDTO> meetings = List.of(new MeetingResponseDTO(1,"X"));
+        when(meetingService.findAllMeeting(any(),any())).thenReturn(meetings);
+        // Act & Assert
+        mockMvc.perform(get("/meeting?searchWord=AAA&searchStartDate=2024-12-01&searchEndDate=2024-12-31")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Table"));
+        var expectParameter = new MeetingSearchForm();
+        expectParameter.setSearchWord("AAA");
+        expectParameter.setSearchStartDate(LocalDate.of(2024,12,1));
+        expectParameter.setSearchEndDate(LocalDate.of(2024,12,31));
+        verify(meetingService,times(1)).searchMeeting(expectParameter,new Pagination(),new OrderProp());
+    }
+    @Test
+    @WithMockUser
+    void searchMeeting_3() throws Exception{
+        List<MeetingResponseDTO> meetings = List.of(new MeetingResponseDTO(1,"X"));
+        when(meetingService.findAllMeeting(any(),any())).thenReturn(meetings);
+        // Act & Assert
+        mockMvc.perform(get("/meeting?searchOpenerId=1&searchWord=AAA&searchStartDate=2024-12-01&searchEndDate=2024-12-31")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Table"));
+        var expectParameter = new MeetingSearchForm();
+        expectParameter.setSearchOpenerId(List.of(1L));
+        expectParameter.setSearchWord("AAA");
+        expectParameter.setSearchStartDate(LocalDate.of(2024,12,1));
+        expectParameter.setSearchEndDate(LocalDate.of(2024,12,31));
+        verify(meetingService,times(1)).searchMeeting(expectParameter,new Pagination(),new OrderProp());
+    }
+    @Test
+    @WithMockUser
+    void searchMeeting_4() throws Exception{
+        List<MeetingResponseDTO> meetings = List.of(new MeetingResponseDTO(1,"X"));
+        when(meetingService.findAllMeeting(any(),any())).thenReturn(meetings);
+        // Act & Assert
+        mockMvc.perform(get("/meeting?searchOpenerId=1,2&searchWord=AAA&searchStartDate=2024-12-01&searchEndDate=2024-12-31")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Table"));
+        var expectParameter = new MeetingSearchForm();
+        expectParameter.setSearchOpenerId(List.of(1L,2L));
+        expectParameter.setSearchWord("AAA");
+        expectParameter.setSearchStartDate(LocalDate.of(2024,12,1));
+        expectParameter.setSearchEndDate(LocalDate.of(2024,12,31));
+        verify(meetingService,times(1)).searchMeeting(expectParameter,new Pagination(),new OrderProp());
     }
 
     @Test
